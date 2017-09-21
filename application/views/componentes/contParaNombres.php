@@ -1,0 +1,1 @@
+<h5 class="nombreAutocompletar">Marca <?php echo $contenido['marca']; ?> - Modelo <?php echo $contenido['modelo']; ?></h5>

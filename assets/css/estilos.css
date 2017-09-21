@@ -1,0 +1,123 @@
+body{
+	background-color: #EEE;
+}
+
+h3.center,h5.center,h4.center{
+	font-family: 'Agency FB';
+}
+
+header #barra-principal{
+	background-color: #143568;
+	margin: 0;
+	position: relative;
+}
+
+header #barra-principal a,
+nav ul a,
+a.breadcrumb{
+    font-family: 'Agency FB';
+    margin-left: 15px;
+}
+
+#barra-secundaria .nav-wrapper li a {
+    font-size: 22px;
+}
+
+header #barra-principal #logoCA {
+	position: absolute;
+	right: 3%;
+	top: 10px;
+}
+
+main {
+/*    margin-top: 40px;*/
+}
+
+#barra-principal .nav-wrapper a.brand-logo{
+	color: #FFDE00;
+	font-family: Georgia;
+	/*font-size: 30px;*/
+}
+
+main #barra-secundaria {
+	margin: 0;
+	background-color: #143568;
+}
+
+main #barra-secundaria .dropdown-button {
+	/*color: #FFDE00;*/
+	color: white;
+	font-size: 1.2em;
+}
+
+main nav:last-child{
+	background-color: transparent;
+	box-shadow: none;
+}
+
+main nav:last-child .nav-wrapper {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
+main nav:last-child .nav-wrapper .breadcrumb{
+	color: black;
+}
+
+main nav:last-child .nav-wrapper .breadcrumb:last-child{
+	color:blue;
+}
+
+.card{
+	overflow: hidden;
+}
+
+.card-hidden{
+	position: absolute;
+	bottom: 0;
+	top: 100%;
+	padding: 4px 10px;
+	margin: 0;
+	background-color: white;
+}
+
+.secondary-content {
+    color: black;
+    transition: all 0.1s ease;
+}
+
+.secondary-content:hover {
+    color: green;
+}
+
+.btnCrearRegistro {
+	background-color: #143568;
+}
+
+.btnCrearRegistro:hover {
+	background-color: #81d4fa;
+}
+button[type="submit"] {
+	background-color: #143568;
+}
+button[type="submit"]:hover {
+	background-color: #81d4fa;
+}
+
+ul.collection li.activa {
+	background-color: #6FDCCB;
+}
+
+ul.collection li.pendiente {
+	background-color: lightskyblue;
+}
+
+/*Lista de Ordenes*/
+
+.collection .orden-activa{
+	background-color: lightgreen;
+}
+
+.collection .orden-pendiente{
+	background-color: lightblue;
+}

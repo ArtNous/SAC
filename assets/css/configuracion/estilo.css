@@ -1,0 +1,63 @@
+/* Crear tiempo de atención */
+div.minutos h3 {
+	padding: 4px;
+	background-color: #12095A;
+	color: white;
+	opacity: 0;
+}
+
+/* Lista de tiempos de atención */
+
+.panel-tiempo{
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+}
+
+.panel-tiempo .servicio,
+.panel-tiempo .tipo-auto{
+	text-align: center;
+	margin: 0;
+	color: black;
+	padding: 5px 0;
+	background-color: #FFDF1B;
+}
+
+.panel-tiempo .servicio{
+	border-bottom: 1px solid black;
+}
+
+.panel-tiempo .tipo-auto{
+	border-top: 1px solid black;
+}
+
+.panel-tiempo .tiempo {
+	margin: 0;
+	text-align: center;
+	font-family: 'The Display St';
+	padding: 15px 0;
+	font-size: 4em;
+	background-color: #0FD4DC;
+}
+
+.panel-tiempo .revelado {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	left: 100%;
+	background-color: rgba(255,255,255,0.75);
+	-webkit-transition: left 0.3s ease;
+	-o-transition: left 0.3s ease;
+	transition: left 0.3s ease;
+	padding: 60px 0;
+	text-align: center;
+}
+
+.panel-tiempo .revelado .btn-floating {
+	margin: 0 5px;
+}
+
+.panel-tiempo:hover .revelado {
+	left: 0;
+}
