@@ -319,5 +319,12 @@ class Orden extends CI_Controller {
 		return true;
 	}
 
+	public function modificarCola(){
+		$cola = json_decode($this->input->post('cola'));
+		foreach ($cola as $indice => $orden) {
+			$this->orden_modelo->modificarPosicion($orden,$indice+1);
+		}
+		return true;
+	}
 
 }

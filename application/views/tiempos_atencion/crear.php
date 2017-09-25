@@ -88,3 +88,8 @@
 	</form>
 </div>
 </div>
+<script>
+	document.getElementById('txtTiempo').addEventListener('blur', e => {
+		document.getElementById('tiempo_minutos').value = e.currentTarget.value;
+	});
+</script>

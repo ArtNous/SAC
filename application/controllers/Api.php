@@ -143,6 +143,7 @@ Class Api extends REST_Controller {
 		$this->db->where('OrdenServicio.estatus',1);
 		$activas = $this->db->get()->result_array();
 		$res = array();
+		date_default_timezone_set('America/Caracas');
 		foreach($activas as $a){
 			$inicioEl = new DateTime($a['inicio']);
 			$inicioEl->add(new DateInterval('PT' . $a['tiempo'] .'M'));
@@ -150,8 +151,7 @@ Class Api extends REST_Controller {
 			$transcurrido = $this->calcularTiempoTranscurrido($a['inicio'],date('Y-m-d H:i:s'));
 			$a['minutos'] = $transcurrido->i;
 			// Chequea si ya debio haber terminado el servicio
-			date_default_timezone_set('America/Caracas');
-			$fin = new DateTime($inicioEl->format('Y-m-d H:m:s'));
+			$fin = new DateTime($inicioEl->format('Y-m-d H:i:s'));
 			$ahora = new DateTime('now');
 			if ($ahora > $fin) {
 				$a['termino'] = 1;
@@ -168,7 +168,6 @@ Class Api extends REST_Controller {
 			$res[] = $a;
 		}
 		echo json_encode($res);
-		// echo $ahora->format('Y-m-d H:m:s');
 	}
 
 	// Calcula el tiempo que lleva activa la orden

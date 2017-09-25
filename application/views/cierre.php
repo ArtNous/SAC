@@ -230,6 +230,8 @@
 
         // Cola general
         if(!(document.getElementById('cola-webix') == null)){
+
+
             $('#select-cola').change(function(){
                 webix.ajax().post('<?php echo base_url('api/cola') ?>',{servicio: $(this).val()}, (text,data) => {
                     ix_cola.clearAll();
@@ -237,12 +239,12 @@
                 });
             });
 
-            var ix_cola = webix.ui({
+        var ix_cola = webix.ui({
                 container:"cola-webix",
                 view:"list", 
                 id:'ix-cola',
                 width:400,
-                height:200,
+                height:500,
                 select: true,
                 template: "<div class='center'>Placa: <b>#placa#</b></div>"
                     +"<div>Nro de orden: #id#</div>"
@@ -293,6 +295,17 @@
             });
         }
 
+        document.getElementById('btnActualizarCola').addEventListener('click', e => {
+            if(ix_cola.getVisibleCount() != 0){
+                var colaActual = ix_cola.data.order;
+                webix.ajax().post('<?php echo base_url('orden/modificarCola'); ?>',{cola: colaActual}, (text,data) => {
+                    console.log(text);
+                });
+                // colaActual.forEach((nro,pos) => {
+                //     console.log('La orden nro ' + nro + ' esta de posicion ' + (pos+1));
+                // });
+            }
+        });
         // Lista de activos
         if(!(document.getElementById('cola-webix-activos') == null)){
 
@@ -309,7 +322,7 @@
                 view:"list", 
                 id: 'cola_webix_activos',
                 width:450,
-                height:200,
+                height:500,
                 template:"#nro_orden#. Placa: #placa# <span style='float: right'>#tiempo# minutos</span>",
                 // templateItem:"<div>Placa: #placa# <progress style='float: right; margin-top: 5px' value='5' max='10'></progress></div><span style='float:right'>#tiempo# minutos</span>",
                 select:true,
@@ -390,6 +403,7 @@
                 xCount: 4,
                 width: 900,
                 height: 300,
+                select: true,
                 ready: function(){
                     this.data.each(obj => {
                         // Termino el servicio
@@ -412,7 +426,7 @@
                         }
                         var g = new JustGage(opc);
                     });
-                }
+                },
             });
         }
 

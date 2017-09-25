@@ -145,6 +145,15 @@ class Orden_modelo extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function modificarPosicion($orden,$posicion_nueva){
+        $this->db->where('nro_orden',$orden);
+        $this->db->update('OrdenServicio',array('posicion_inicial'=>$posicion_nueva));
+        if($this->db->affected_rows() == 0){
+            return false;
+        }
+        return true;
+    }
+
     public function estatusActiva($datos){
         // Chequea si hay tecnicos disponibles para ese servicio
         $this->db->query('SET DATEFORMAT ymd');

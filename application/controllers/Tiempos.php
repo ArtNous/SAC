@@ -59,10 +59,10 @@ class Tiempos extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('servicio', 'servicio', 'required');
-		$this->form_validation->set_rules('tipo', 'Tipo de vehiculo', 'required');
-		$this->form_validation->set_rules('tiempo', 'Tiempo de atención', 'required');
-		$this->form_validation->set_rules('kilometraje', 'kilometraje', 'required');
+		$this->form_validation->set_rules('servicio', 'servicio', 'required',array('required'=>'El servicio debe ser elegido'));
+		$this->form_validation->set_rules('tipo', 'Tipo de vehiculo', 'required',array('required'=>'El tipo de vehiculo debe ser elegido'));
+		$this->form_validation->set_rules('tiempo', 'Tiempo de atención', 'required',array('required'=>''));
+		$this->form_validation->set_rules('kilometraje', 'kilometraje', 'required',array('required'=>'El campo kilometraje debe ser llenado'));
 
 		if(($tipov != null) && ($servicio != null)){
 			$this->data['campos'] = $this->tiempos_modelo->ver($servicio,$tipov);

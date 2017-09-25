@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'localhost:8000/materialize_dashboard';
- $config['base_url'] = 'http://localhost/atencion';
+ $config['base_url'] = 'http://localhost:8000/atencion';
  // $config['base_url'] = 'http://192.168.1.32:8000/atencion';
 
 /*
