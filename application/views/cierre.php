@@ -141,7 +141,15 @@
                     end: 30,
                     step: 5
                 },
-                value: '#CANTIDAD#'
+                value: '#CANTIDAD#',
+                legend: {
+                    values: [
+                        {text: 'Servicios', color: 'blue'}
+                    ],
+                    align: 'right',
+                    width: 100,
+                    layout: 'y'
+                }
             });  
 
             webix.ui({
@@ -230,12 +238,12 @@
 
         // Cola general
         if(!(document.getElementById('cola-webix') == null)){
-
-
             $('#select-cola').change(function(){
+                document.getElementById('loader-cola').style.display = 'block';
                 webix.ajax().post('<?php echo base_url('api/cola') ?>',{servicio: $(this).val()}, (text,data) => {
                     ix_cola.clearAll();
                     ix_cola.parse(text);
+                    document.getElementById('loader-cola').style.display = 'none';
                 });
             });
 
@@ -295,25 +303,29 @@
             });
         }
 
-        document.getElementById('btnActualizarCola').addEventListener('click', e => {
-            if(ix_cola.getVisibleCount() != 0){
-                var colaActual = ix_cola.data.order;
-                webix.ajax().post('<?php echo base_url('orden/modificarCola'); ?>',{cola: colaActual}, (text,data) => {
-                    console.log(text);
-                });
-                // colaActual.forEach((nro,pos) => {
-                //     console.log('La orden nro ' + nro + ' esta de posicion ' + (pos+1));
-                // });
-            }
-        });
+        if(!(document.getElementById('btnActualizarCola') == null)){
+            document.getElementById('btnActualizarCola').addEventListener('click', e => {
+                if(ix_cola.getVisibleCount() != 0){
+                    var colaActual = ix_cola.data.order;
+                    webix.ajax().post('<?php echo base_url('orden/modificarCola'); ?>',{cola: colaActual}, (text,data) => {
+                        console.log(text);
+                    });
+                    // colaActual.forEach((nro,pos) => {
+                    //     console.log('La orden nro ' + nro + ' esta de posicion ' + (pos+1));
+                    // });
+                }
+            });            
+        }
+
         // Lista de activos
         if(!(document.getElementById('cola-webix-activos') == null)){
-
             $('#select-cola-activos').change(function(){
+                document.getElementById('loader-cola-activos').style.display = 'block';
                 webix.ajax().post('<?php echo base_url('api/cola_activos') ?>',{servicio: $(this).val()}, (text,data) => {
                     console.log(text);
                     cola_webix_activos.clearAll();
                     cola_webix_activos.parse(text);
+                    document.getElementById('loader-cola-activos').style.display = 'none';
                 });
             });
 
@@ -403,7 +415,6 @@
                 xCount: 4,
                 width: 900,
                 height: 300,
-                select: true,
                 ready: function(){
                     this.data.each(obj => {
                         // Termino el servicio
@@ -457,13 +468,13 @@
                     {id: 'nro_orden', header: 'Nro Orden', sort: 'text', adjust: 'data'}, // Nro
                     {id: 'placa', header: ['Placa',{content: 'textFilter'}], sort: 'text'}, // Placa
                     {id: 'cliente', header: ['Cliente',{content: 'textFilter'}], sort: 'text'}, // Cedula
-                    {id: 'fecha', header: ['Fecha',{content: 'textFilter'}], sort: 'text'}, // Cedula
+                    {id: 'fecha', header: ['Fecha',{content: 'dateFilter'}], sort: 'date'}, // Cedula
                     {id: 'serv', header: ['Servicio',{content: 'textFilter'}], sort: 'text', fillspace: true}, // Servicio
                     {id: 'estatus', header: ['Estatus',{content: 'textFilter'}], sort: 'text'}, // Estatus
-                    {id: 'tec', header: 'Técnico', sort: 'text', fillspace: true} // Tecnico
+                    {id: 'tec', header: ['Técnico',{content: 'textFilter'}], sort: 'text', fillspace: true} // Tecnico
                 ],
                 scheme: {
-                    $init: function(obj) {
+                    $change: function(obj) {
                         if(obj.estatus == 1) {
                             obj.estatus = "Activa";
                         }
@@ -592,8 +603,7 @@
                 columns: [
                     {id: 'codigo', header: 'Código', adjust: 'data', sort: 'string'},
                     {id: 'nombre', header: ['Nombre',{content: 'textFilter'}], sort: 'string', adjust: 'data'},
-                    {id: 'descripcion', header: 'Descripción', width: 350},
-                    {id: 'prox_km', header: 'Próximo kilometraje', fillspace: true, string: 'int', css: {'text-align': 'center'}, template: '#prox_km# Km'}
+                    {id: 'descripcion', header: ['Descripción',{content: 'textFilter'}], fillspace:true, sort: 'string'},
                 ],
                 height: 300,
                 width: 700,
@@ -641,7 +651,7 @@
                             return obj.nombre;
                         }
                     },
-                    { id:"estatus",    header:"Estatus",  width:90}, 
+                    { id:"estatus",    header:["Estatus",{content: 'selectFilter'}],  width:90, sort: 'string'}, 
                     { id:"codigoINT",   header:"Código INT", width:120}
                 ],
                 scheme:{
@@ -687,7 +697,6 @@
                     {id: 'marca', header: ['Marca',{content: 'textFilter'}], sort: 'string', adjust: 'data'},
                     {id: 'modelo', header: ['Modelo',{content: 'textFilter'}], adjust: 'data'},
                     {id: 'tipo', header: ['Tipo de vehiculo',{content: 'textFilter'}], fillspace: true, string: 'string'},
-                    {id: 'km', header: ['kilometraje',{content: 'numberFilter'}], fillspace: true, sort: 'int', template: '#km# km'}
                 ],
                 height: 300,
                 width: 700,
@@ -857,14 +866,21 @@
             webix.ui({
                 container:"lista-tiempos-webix",
                 view:"treetable",
+                id:'ix-tiempos',
                 url: '<?php echo base_url("api/tiempos"); ?>',
                 columns:[
                     { id:"servicio",   header:["Servicio",{content: 'textFilter'}], width: 300, template:function(obj, common){
                             if (obj.$level == 1) return common.treetable(obj, common) + obj.value;
                             return obj.tipo;
                         }},
-                    { id: 'tiempo', header: "Tiempo de servicio (minutos)", width: 300, css: {'text-align': 'center'}},
-                    { id: 'kilometraje', header: ['Próximo kilometraje',{content: 'numberFilter'}], template: "#kilometraje# km"}
+                    { id: 'tiempo', header: ["Tiempo de servicio",{content: 'numberFilter'}], width: 300, css: {'text-align': 'center'}, template: (obj, common) => {
+                        if(obj.$level == 1) return "";
+                        return obj.tiempo + " minutos";
+                    }},
+                    { id: 'kilometraje', header: ['Próximo kilometraje',{content: 'numberFilter'}], template: "#kilometraje# km", template:function(obj, common){
+                            if (obj.$level == 1) return "";
+                            return obj.kilometraje + " km";
+                        }}
                 ],
                 scheme:{
                     $group:"servicio",
@@ -1080,6 +1096,7 @@
 
     if(!(document.getElementById('txtUsuario') == null && document.getElementById('txtPlacaOrden') == null)){
         $('#txtUsuario').keyup(e => {
+            document.getElementById('loader-cod-cliente').style.display = 'block';
             $.ajax('<?php echo base_url("cliente/paracombo"); ?>',{
                 data: {valor: e.currentTarget.value},
                 dataType: 'json',
@@ -1089,6 +1106,7 @@
                 },
                 success: datos => {
                     console.log(datos);
+                    document.getElementById('loader-cod-cliente').style.display = 'none';
                     $('#txtUsuario').autocomplete({
                         data: datos,
                         limit: 20, // The max amount of results that can be shown at once. Default: Infinity.

@@ -84,7 +84,7 @@ Class Api extends REST_Controller {
 	}
 
 	public function vehiculos_get() {
-		$this->db->select('Vehiculo.placa, Marca.nombre as marca, Modelo.nombre as modelo, TipoVehiculo.descripcion as tipo, Vehiculo.km_actual as km');
+		$this->db->select('Vehiculo.placa, Marca.nombre as marca, Modelo.nombre as modelo, TipoVehiculo.descripcion as tipo');
 		$this->db->from('Vehiculo');
 		$this->db->join('Marca','Marca.id = Vehiculo.marca','inner');
 		$this->db->join('Modelo','Modelo.id = Vehiculo.modelo','inner');
@@ -134,7 +134,7 @@ Class Api extends REST_Controller {
 	}
 
 	public function progreso_activas_get(){
-		$this->db->select('OrdenServicio.nro_orden as orden,OrdenServicio.placa,OrdenServicio.fecha_inicio as inicio,Servicios_orden.prox_km as km, Tecnicos.nombre as tecNombre, TiempoAtencion.tiempo, Servicios_orden.nombre as servicio');
+		$this->db->select('OrdenServicio.nro_orden as orden,OrdenServicio.placa,OrdenServicio.fecha_inicio as inicio,TiempoAtencion.kilometraje as km, Tecnicos.nombre as tecNombre, TiempoAtencion.tiempo, Servicios_orden.nombre as servicio');
 		$this->db->from('OrdenServicio');
 		$this->db->join('Servicios_orden','Servicios_orden.codigo = OrdenServicio.servicio','inner');
 		$this->db->join('Vehiculo','Vehiculo.placa = OrdenServicio.placa','inner');

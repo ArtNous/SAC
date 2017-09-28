@@ -19,6 +19,9 @@
                     echo form_input($atributos);
                 ?>
                 <label for="txtUsuario">Código del cliente</label>
+                <div class="progress" id="loader-cod-cliente" style="display: none">
+                  <div class="indeterminate" style="width: 70%"></div>
+                </div>
             </div>
             <div class="input-field col s6 m4 l4 campoOrden">
                 <i class="prefix material-icons">account_circle</i>
@@ -97,6 +100,9 @@
             }
             echo form_dropdown('',$opciones,"",'id="select-cola"');
         ?>
+        <div class="progress" id="loader-cola" style="display: none">
+          <div class="indeterminate" style="width: 70%"></div>
+        </div>
         <div id="cola-webix"></div>
         <?php if($this->session->userdata('rol') == 1): ?>
         <button class="btn waves-effect waves-light blue" id="btnActualizarCola" style="margin-top: 5px">Actualizar</button>
@@ -111,6 +117,9 @@
             }
             echo form_dropdown('',$opciones,"",'id="select-cola-activos"');
         ?>
+        <div class="progress" id="loader-cola-activos" style="display: none">
+          <div class="indeterminate" style="width: 70%"></div>
+        </div>
         <div id="cola-webix-activos"></div>
     </div>
     <div class="col s12 m12 l12">

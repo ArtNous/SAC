@@ -241,7 +241,7 @@ class Orden_modelo extends CI_Model {
         $this->db->where('nro_orden',$nro_orden);        
         $fecha = date('Y-m-d H:m:s');
         $this->db->query('SET DATEFORMAT ymd');
-        $this->db->update('OrdenServicio',array('estatus'=>3,'fecha_final'=>$fecha,'tecnico'=>null));
+        $this->db->update('OrdenServicio',array('estatus'=>3,'fecha_final'=>$fecha));
     }
 
     public function anularOrden($nro_orden){
