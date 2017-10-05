@@ -15,6 +15,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<link rel="stylesheet" href="<?php echo base_url('assets/webix/skins/air.css'); ?>">
 		<link rel="stylesheet" href="<?php echo base_url('assets/css/sweetalert2.min.css'); ?>">
 		<style>
+			/*Lista de ordenes - Botones*/
+			.btnToolbar button {
+				color: black;
+			}
 			/*Formularios*/
 			.error_form{
 				padding: 8px;

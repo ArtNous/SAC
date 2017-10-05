@@ -458,20 +458,38 @@
             }
         });
 
+         function filtrar(tipo) {
+            $$('ordenes').filter('#estatus#',tipo);
+         }
+
         if(!(document.getElementById('lista-ordenes-webix') == null)){
             webix.ui({
-                view: 'datatable',
                 container: 'lista-ordenes-webix',
+                rows: [
+                    {
+                        view: 'toolbar',
+                        paddingY: 5,
+                        cols: [
+                            {view: 'template', template: 'Filtrar por:', width: 90, type: 'text', css: {'background-color': 'transparent', 'border': 'none', 'font-size': '15px','color': 'white'}},
+                            {view: 'button', label: 'Listas', width: 80, css: {'color': 'black'}, click: '$$("ordenes").filter("#estatus#","Finalizada")'},
+                            {view: 'button', label: 'Pendientes', width: 80, css: {'color': 'black'}, click: '$$("ordenes").filter("#estatus#","En cola")'},
+                            {view: 'button', label: 'Activas', width: 80, css: {'color': 'black'}, click: '$$("ordenes").filter("#estatus#","Activa")'},
+                            {view: 'button', label: 'Ver todas', width: 100, align: 'right', click: '$$("ordenes").filterByAll()'}
+                        ]
+                    },
+                    {
+view: 'datatable',
+                // container: 'lista-ordenes-webix',
                 id: 'ordenes',
                 url: '<?php echo base_url("api/ordenes"); ?>',
                 columns: [
-                    {id: 'nro_orden', header: 'Nro Orden', sort: 'text', adjust: 'data'}, // Nro
-                    {id: 'placa', header: ['Placa',{content: 'textFilter'}], sort: 'text'}, // Placa
-                    {id: 'cliente', header: ['Cliente',{content: 'textFilter'}], sort: 'text'}, // Cedula
+                    {id: 'nro_orden', header: 'Nro Orden', sort: 'text', adjust: 'data', footer: {content: 'summColumn'}}, // Nro
+                    {id: 'placa', header: ['Placa',{content: 'textFilter'}], sort: 'string'}, // Placa
+                    {id: 'cliente', header: ['Cliente',{content: 'textFilter'}], sort: 'string'}, // Cedula
                     {id: 'fecha', header: ['Fecha',{content: 'dateFilter'}], sort: 'date'}, // Cedula
-                    {id: 'serv', header: ['Servicio',{content: 'textFilter'}], sort: 'text', fillspace: true}, // Servicio
-                    {id: 'estatus', header: ['Estatus',{content: 'textFilter'}], sort: 'text'}, // Estatus
-                    {id: 'tec', header: ['Técnico',{content: 'textFilter'}], sort: 'text', fillspace: true} // Tecnico
+                    {id: 'serv', header: ['Servicio',{content: 'selectFilter'}], sort: 'string', fillspace: true}, // Servicio
+                    {id: 'estatus', header: 'Estatus', sort: 'string'}, // Estatus
+                    {id: 'tec', header: ['Técnico',{content: 'textFilter'}], sort: 'string', fillspace: true} // Tecnico
                 ],
                 scheme: {
                     $change: function(obj) {
@@ -520,6 +538,9 @@
                     size: 15,
                     group: 10
                 }
+                    }
+                ]
+                
             });
         }
 
