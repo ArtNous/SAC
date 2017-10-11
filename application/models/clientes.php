@@ -89,5 +89,12 @@ class Clientes extends CI_Model {
 	    return $this->db->get('Zonas')->result_array();
 	}
 
+	public function verIvas(){
+		$this->db->order_by('RegimenIVA', 'asc');
+		$res = $this->db->query('SELECT DISTINCT RegimenIVA FROM Clientes
+		  WHERE RegimenIVA IS NOT NULL');
+	    return $res->result_array();
+	}
+
 }
 ?>

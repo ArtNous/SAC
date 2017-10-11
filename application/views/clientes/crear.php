@@ -176,10 +176,10 @@
 					<?php echo form_error('estado'); ?>
 					<?
 						if($opcion == 1){
-							echo form_dropdown('estado',$estados,'');
+							echo form_dropdown('estado',$estados,'','id="estado"');
 						}
 						else {
-							echo form_dropdown('estado',$estados,$cliente['Estado']);
+							echo form_dropdown('estado',$estados,$cliente['Estado'],'id="estado"');
 						}
 					?>
 				<label>Estado</label>
@@ -188,10 +188,10 @@
 					<?php echo form_error('ciudad'); ?>
 					<?
 						if($opcion == 1){
-							echo form_dropdown('ciudad',$ciudades,'');
+							echo form_dropdown('ciudad',$ciudades,'','id="ciudad');
 						}
 						else {
-							echo form_dropdown('ciudad',$ciudades,$cliente['Ciudad']);
+							echo form_dropdown('ciudad',$ciudades,$cliente['Ciudad'],'id="ciudad');
 						}
 					?>
 				<label>Ciudad</label>
@@ -200,10 +200,10 @@
 					<?php echo form_error('municipio'); ?>
 					<?
 						if($opcion == 1){
-							echo form_dropdown('municipio',$municipios,'');
+							echo form_dropdown('municipio',$municipios,'','id="municipio"');
 						}
 						else {
-							echo form_dropdown('municipio',$municipios,$cliente['Municipio']);
+							echo form_dropdown('municipio',$municipios,$cliente['Municipio'],'id="municipio"');
 						}
 					?>
 				<label>Municipio</label>

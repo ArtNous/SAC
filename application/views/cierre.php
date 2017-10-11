@@ -47,23 +47,50 @@
     // Se verifica si el cliente existe, en caso tal, muestra los datos
     // en el formulario y da un aviso que existe.
     var verificarCliente = function(rif){
+
         $.ajax('<?php echo base_url('cliente/verificarCliente/') ?>' + rif,{
             success: dato => {
                 if (dato.msj == 1){
                     $('#Cod').val(dato.CodigoCliente);
                     $('#grupo').val(dato.CodigoGrupo);
-                    $('#grupo option[value="'+dato.CodigoGrupo+'"]').prop('selected',true);
                     $('#zona').val(dato.Zona);
                     $('#nombres').val(dato.Nombre);
                     $('#razon').val(dato.RazonSocial);
                     $('#direccion-sel').val(dato.Direccion);
                     $('#nit').val(dato.NIT);
-                    $('#documento').val(dato.DocumentoFiscal);
                     $('#tlf').val(dato.Telefonos);
                     $('#estado').val(dato.Estado);
                     $('#ciudad').val(dato.Ciudad);
                     $('#municipio').val(dato.Municipio);
                     $('h4#cliente_existe').text('El cliente existe');
+
+                    $('#grupo option[selected]').prop('selected',false);
+                    $('#grupo option[value="'+ dato.CodigoGrupo +'"]').prop('selected',true);
+                    $('#grupo').material_select();
+
+                    $('#zona option[selected]').prop('selected',false);
+                    $('#zona option[value="'+ dato.Zona +'"]').prop('selected',true);
+                    $('#zona').material_select();
+
+                    $('#riva option[selected]').prop('selected',false);
+                    $('#riva option[value="'+dato.RegimenIVA+'"]').prop('selected',true);
+                    $('#riva').material_select();
+
+                    $('#estado option[selected]').prop('selected',false);
+                    $('#estado option[value="'+dato.Estado+'"]').prop('selected',true);
+                    $('#estado').material_select();
+
+                    $('#ciudad option[value="'+dato.Ciudad+'"]').prop('selected',true);
+                    $('#ciudad').material_select();
+                    $('#ciudad option[selected]').prop('selected',false);
+
+                    $('#municipio option[selected]').prop('selected',false);
+                    $('#municipio option[value="'+dato.Municipio+'"]').prop('selected',true);
+                    $('#municipio').material_select();
+
+                    console.log(dato.Municipio);
+                    console.log(dato.Estado);
+                    console.log(dato.Ciudad);
                 } else {
                     console.log('El cliente no existe');
                 }
