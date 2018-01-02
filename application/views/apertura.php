@@ -17,5 +17,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				}
 			}
 		</style>
+	</style>
 	</head>
 	<body>

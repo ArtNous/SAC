@@ -60,14 +60,10 @@ class Marcas extends CI_Controller {
 
     public function crear(){
         $this->data['css'] = array(
-            "assets/css/materialize.min.css",
-            "assets/css/estilos.css",
-            // "assets/css/dragula.min.css",
-            "assets/css/configuracion/estilo.css",
-            // "assets/webix/webix.css",
+            'assets/css/materialize.min.css',
+            'assets/css/estilos.css',
+            'assets/css/configuracion/estilo.css',
             "assets/webix/skins/air.css",
-            // "assets/css/sweetalert2.min.css",
-            "assets/css/form_cliente.css",
         );
         $this->data['niveles'] = array(
             array('url'=>base_url(''),'nombre'=>'Principal'),

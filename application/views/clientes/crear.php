@@ -10,6 +10,7 @@
 		?>
 		<div class="row">
 			<div class="input-field col s6 m2 l2">
+				
 				<?php if($opcion == 1): ?>
 					<?php echo form_error('codigo','<span class="error_form">','</span>'); ?>
 					<input onblur="verificarCliente(this.value)"  id="Cod" type="text" class="validate" value="<?php echo set_value('codigo'); ?>" name="codigo">

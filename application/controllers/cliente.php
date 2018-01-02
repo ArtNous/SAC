@@ -80,6 +80,14 @@ class Cliente extends CI_Controller {
 			"assets/css/form_cliente.css",
 		);
 
+		$this->data['js'] = array(
+			'assets/js/jquery-3.2.1.min.js',
+			'assets/js/materialize.min.js',
+			'assets/js/confUI.js',
+			'assets/js/jquery.formatter.min.js',
+			'assets/js/formatter.min.js',
+		);
+
 		$this->data['bds'] = $this->bds;
 		
 		if($rif == null){
