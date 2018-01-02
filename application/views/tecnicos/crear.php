@@ -63,7 +63,7 @@
                         }
                         $temp[''] = 'Seleccione los servicios';
                         foreach($servicios as $s){
-                            $temp[$s['codigo']] = $s['nombre'];
+                            $temp[$s['Codigo']] = $s['Nombre'];
                         }
                         echo form_multiselect('servicios[]',$temp,isset($tecnico) ? $serv : "",'id="multicombo-servicios"');
                     ?>

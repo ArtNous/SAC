@@ -5,7 +5,7 @@ class Cliente extends CI_Controller {
 
 	private $bds = array();
 	private $data = array();
-    
+
     private $bc_inicial = "Clientes";
     private $bc_crear = "Crear";
     private $bc_buscar = "Buscar";
@@ -66,6 +66,19 @@ class Cliente extends CI_Controller {
 	}
 
 	public function crear($rif = null){
+
+		// Establecemos las hojas de estilos que mostraremos
+		// en el formulario del cliente
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 
 		$this->data['bds'] = $this->bds;
 		
@@ -146,7 +159,7 @@ class Cliente extends CI_Controller {
 
 	    if ($this->form_validation->run() == FALSE)
 		{
-			$this->load->view('apertura');
+			$this->load->view('apertura',$this->data);
 			$this->load->view('header/principal');
 			$this->load->view('main/principal',$this->data);
 			if($this->data['opcion'] == 1){

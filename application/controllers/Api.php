@@ -40,7 +40,7 @@ Class Api extends REST_Controller {
 	}
 
 	public function servicios_get() {
-		$servicios = $this->db->get('Servicios_orden')->result_array();
+		$servicios = $this->db->get('Servicios')->result_array();
 		echo json_encode($servicios);
 	}
 

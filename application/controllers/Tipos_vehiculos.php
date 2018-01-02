@@ -25,6 +25,16 @@ class Tipos_vehiculos extends CI_Controller {
 	// Muestra vista con lista de marcas disponibles
 	public function index()
 	{
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->data['bds'] = $this->bds;
 		$this->load->helper('form');
 		$this->load->library('form_validation');
@@ -38,7 +48,8 @@ class Tipos_vehiculos extends CI_Controller {
         $this->data['nombre_ix'] = 'tipos';
         $this->data['tooltip'] = 'tipo de vehículo';
 
-		$this->load->view('apertura');
+		$this->load->view('apertura',$this->data
+	);
 		$this->load->view('header/principal');
 		$this->load->view('main/principal',$this->data);
 		$this->load->view('componentes/lista_webix',$this->data);
@@ -47,6 +58,16 @@ class Tipos_vehiculos extends CI_Controller {
 	}
 
 	public function crear(){
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->data['bds'] = $this->bds;
 		$this->data['niveles'] = array(
 			array('url'=>base_url('orden'),'nombre'=>'Principal'),
@@ -67,7 +88,7 @@ class Tipos_vehiculos extends CI_Controller {
 	    if ($this->form_validation->run() == FALSE)
 		{
 			$this->data['tipos'] = $this->tipo_vehiculo->listar();
- 			$this->load->view('apertura');
+ 			$this->load->view('apertura',$this->data);
 			$this->load->view('header/principal');
 			$this->load->view('main/principal',$this->data);
 			$this->load->view('tipos_vehiculos/crear',$this->data);

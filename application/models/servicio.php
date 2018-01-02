@@ -7,27 +7,27 @@ class Servicio extends CI_Model {
     }
     
     public function crear($servicio){
-        $this->db->insert('Servicios_orden', $servicio);
+        $this->db->insert('Servicios', $servicio);
     }
     
     public function ver($codigo)
-    { return $this->db->get_where('Servicios_orden',array('codigo'=>$codigo))->row_array(); }
+    { return $this->db->get_where('Servicios',array('codigo'=>$codigo))->row_array(); }
 
     
     public function listar()
     { 
-        $this->db->order_by('codigo', 'asc');
-        return $this->db->get('Servicios_orden')->result_array();
+        $this->db->order_by('Codigo', 'asc');
+        return $this->db->get('Servicios')->result_array();
     }
     
     public function eliminar($codigo)
     {
-        $this->db->delete('Servicios_orden', array('codigo' => $codigo));
+        $this->db->delete('Servicios', array('codigo' => $codigo));
     }
 
     public function actualizar($servicio){
         $this->db->where('codigo',$servicio['codigo']);
-        $this->db->update('Servicios_orden',$servicio);
+        $this->db->update('Servicios',$servicio);
     }
     
 }

@@ -15,11 +15,21 @@ class Configuracion extends CI_Controller {
 	}
 	public function index()
 	{
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$data['bds'] = $this->bds;
 		$data['niveles'] = array(
 			array('url'=>base_url(''),'nombre'=>'Principal'),
 			array('url'=>base_url('configuracion'),'nombre'=>'Panel de configuracion'),);
-		$this->load->view('apertura');
+		$this->load->view('apertura',$this->data);
 		$this->load->view('header/principal');
 		$this->load->view('main/principal',$data);
 		$this->load->view('configuracion/principal',$data);

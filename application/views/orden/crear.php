@@ -5,6 +5,8 @@
         <div class="col s12 m12 l12" id="lblNombreCliente">
         </div>
         <div class="col s12 m12 l12">
+            
+            <!-- Campo código del cliente -->
             <div class="input-field col s6 m4 l4 campoOrden">
             <?php echo form_error('cliente'); ?>
                 <i class="prefix material-icons">account_circle</i>
@@ -23,6 +25,8 @@
                   <div class="indeterminate" style="width: 70%"></div>
                 </div>
             </div>
+
+            <!-- Campo nombre del cliente -->
             <div class="input-field col s6 m4 l4 campoOrden">
                 <i class="prefix material-icons">account_circle</i>
                 <?php  
@@ -37,8 +41,11 @@
                 ?>
                 <label for="txtUsuario">Nombre del cliente</label>
             </div>
+
         </div>
         <div class="col s12 m12 l12">
+            
+            <!-- Campo placa del cliente -->
             <div class="input-field col s12 m4 l4 campoOrden">
                 <?php echo form_error('placa'); ?>
                 <?php  
@@ -53,20 +60,41 @@
                 ?>
                 <label for="txtPlacaOrden">Placa del Vehículo</label>
             </div>
+
+            <!-- Texto para mostrar la descripcion del vehiculo
+            que selecciono -->
             <div class="col s12 m8 l8" id="nombreVehiculo"></div>
         </div>
         <div class="col s12 m12 l12">
-            <div class="input-field col s12 m4 l4 campoOrden">
-                <?php echo form_error('servicio'); ?>
+            
+            <!-- Campo para buscar el servicio a prestar -->
+             <div class="input-field col s12 m4 l4 campoOrden">
+                <?php // echo form_error('servicio'); ?>
                 <?php 
-                    $opciones[''] = 'Seleccione el servicio';
-                    foreach($servicios as $s){
-                        $opciones[$s['codigo']] = $s['nombre'];
-                    }
-                    echo form_dropdown('servicio',$opciones,set_value('servicio'));
+                    // $opciones[''] = 'Seleccione el servicio';
+                    /* foreach($servicios as $s){
+                        $opciones[$s['Codigo']] = $s['Nombre'];
+                    }*/
+                    // echo form_dropdown('servicio',$opciones,set_value('servicio'));
                 ?>
-                <label>Servicio</label>
-            </div>
+                <!-- <label>Servicio</label> -->
+
+                <i class="prefix material-icons">account_circle</i>
+                <?php  
+                    $atributos = array(
+                        'name' => 'servicio',
+                        'id' => 'txtServicio',
+                        'class' => 'autocomplete',
+                        'value' => set_value('cliente'),
+                         // Ingrese mas campos aqui
+                    );
+                    echo form_input($atributos);
+                ?>
+                <label for="txtUsuario">Servicio</label>
+
+            </div> <!-- Fin de combo -->
+
+            
 
             <div class="input-field col s6 m4 l4 campoOrden">
                 <?php echo form_error('km_actual'); ?>
@@ -96,7 +124,7 @@
         <?php 
             $opciones[''] = 'Seleccione el servicio';
             foreach($servicios as $s){
-                $opciones[$s['codigo']] = $s['nombre'];
+                $opciones[$s['Codigo']] = $s['Nombre'];
             }
             echo form_dropdown('',$opciones,"",'id="select-cola"');
         ?>
@@ -113,7 +141,7 @@
         <?php 
             $opciones[''] = 'Seleccione el servicio';
             foreach($servicios as $s){
-                $opciones[$s['codigo']] = $s['nombre'];
+                $opciones[$s['Codigo']] = $s['Nombre'];
             }
             echo form_dropdown('',$opciones,"",'id="select-cola-activos"');
         ?>

@@ -31,6 +31,16 @@ class Orden extends CI_Controller {
 	}
 	public function index()
 	{
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->data['niveles'] = array(
 			array('url'=>base_url(''),'nombre'=>'Principal'),
 			array('url'=>base_url('orden'),'nombre'=>$this->bc_inicial),);
@@ -41,7 +51,7 @@ class Orden extends CI_Controller {
 		$this->data['tooltip'] = 'orden';
 		$this->data['bds'] = $this->bds;
 
-		$this->load->view('apertura');
+		$this->load->view('apertura',$this->data);
 		$this->load->view('header/principal');
 		$this->load->view('main/principal',$this->data);
 		$this->load->view('componentes/lista_webix',$this->data);
@@ -50,7 +60,16 @@ class Orden extends CI_Controller {
 	}
 
 	public function crear(){
-
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->data['bds'] = $this->bds;
 	
 		$this->data['niveles'] = array(
@@ -81,7 +100,7 @@ class Orden extends CI_Controller {
 			$datos['servicios'] = $this->servicio->listar();
 			$datos['tecnicos'] = $this->tecnicos_mod->listar();
 			$datos['placas'] = $this->vehiculos->listar();
-			$this->load->view('apertura');
+			$this->load->view('apertura',$this->data);
 			$this->load->view('header/principal');
 			$this->load->view('main/principal',$this->data);
 			$this->load->view('orden/crear',$datos);

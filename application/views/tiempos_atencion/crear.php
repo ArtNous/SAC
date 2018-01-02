@@ -16,7 +16,7 @@
 					<?php  
 						$atributos[''] = 'Seleccione el servicio';
 						foreach($servicios as $s){
-							$atributos[$s['codigo']] = $s['nombre'];
+							$atributos[$s['Codigo']] = $s['Nombre'];
 						}
 						echo form_dropdown('servicio',$atributos,isset($campos['servicio']) ? $campos['servicio'] : "",'id="ser-serv"');
 					?>

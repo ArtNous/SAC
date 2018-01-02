@@ -10,6 +10,12 @@ Class Auth extends CI_Controller {
 		$this->db->db_select($this->session->userdata('bd'));
 		$this->load->dbutil();
 		$this->bds = $this->dbutil->list_databases();
+		// foreach ($this->bds as $stringBD) {
+		// 	$lugar = stripos($stringBD,"emp");
+		// 	if($lugar != false){
+				
+		// 	}
+		// }
 		$this->load->helper('url');
 		$this->load->library('form_validation');
 		$this->form_validation->set_error_delimiters('<span class="error-form">', '</span>');
@@ -45,8 +51,8 @@ Class Auth extends CI_Controller {
 			$pass = $this->input->post('pass');
 
 			$existe = $this->usuarios_mod->existeUsuario($usuario,sha1($pass));
-			$datosUsuario = $this->usuarios_mod->dameUsuario($usuario,sha1($pass));
 			if ($existe){
+				$datosUsuario = $this->usuarios_mod->dameUsuario($usuario,sha1($pass));
 				$datos_sesion = array(
 					"usuario" => $usuario,
 					"email" => $datosUsuario['email'],

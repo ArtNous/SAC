@@ -5,7 +5,7 @@ class Servicios extends CI_Controller {
 
 	private $bds = array();
 	private $data = array();
-    
+
     private $bc_inicial = "Servicios";
     private $bc_crear = "Crear";
     private $crearUrl = "servicios/crear";
@@ -28,7 +28,16 @@ class Servicios extends CI_Controller {
 	}
 	public function index()
 	{
-	
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->load->helper('form');
 		$this->load->library('form_validation');
         
@@ -41,7 +50,7 @@ class Servicios extends CI_Controller {
 		$this->data['tooltip'] = 'servicio';
 		$this->data['bds'] = $this->bds;
 
-		$this->load->view('apertura');
+		$this->load->view('apertura',$this->data);
 		$this->load->view('header/principal');
 		$this->load->view('main/principal',$this->data);
 		$this->load->view('componentes/lista_webix',$this->data);
@@ -50,7 +59,16 @@ class Servicios extends CI_Controller {
 	}
 
 	public function crear($codigo = null){
-		
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		$this->data['bds'] = $this->bds;
 		$this->data['niveles'] = array(
 			array('url'=>base_url(''),'nombre'=>'Principal'),
@@ -72,7 +90,7 @@ class Servicios extends CI_Controller {
 	    if ($this->form_validation->run() == FALSE)
 		{
 			$datos['servicios'] = $this->servicio->listar();
-			$this->load->view('apertura');
+			$this->load->view('apertura',$this->data);
 			$this->load->view('header/principal');
 			$this->load->view('main/principal',$this->data);
 			$this->load->view('servicios/crear',$this->data);
