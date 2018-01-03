@@ -190,6 +190,16 @@ class Cliente extends CI_Controller {
 	}
 
 	public function editar($rif){
+		$this->data['css'] = array(
+			"assets/css/materialize.min.css",
+			"assets/css/estilos.css",
+			// "assets/css/dragula.min.css",
+			"assets/css/configuracion/estilo.css",
+			// "assets/webix/webix.css",
+			"assets/webix/skins/air.css",
+			// "assets/css/sweetalert2.min.css",
+			"assets/css/form_cliente.css",
+		);
 		
 		$this->data['niveles'] = array(
 			array('url'=>base_url('orden'),'nombre'=>'Principal'),
@@ -201,19 +211,16 @@ class Cliente extends CI_Controller {
 
 		$this->form_validation->set_rules('codigo', 'codigo del cliente', 'required');
 		$this->form_validation->set_rules('rif', 'rif del cliente', 'required');
-		$this->form_validation->set_rules('direccion', 'dirección del cliente', 'required');
-		$this->form_validation->set_rules('nit', 'nit', 'required');
 		$this->form_validation->set_rules('zona', 'zona del cliente', 'required');
-		$this->form_validation->set_rules('codContable', 'Codigo contable', 'required');
-		$this->form_validation->set_rules('codGrupo', 'código del grupo', 'required');
+		$this->form_validation->set_rules('grupo', 'código del grupo', 'required');
 
 	    if ($this->form_validation->run() == FALSE)
 		{
 			$this->data['cliente'] = $this->cliente;
-			$this->load->view('apertura');
+			$this->load->view('apertura',$this->data);
 			$this->load->view('header/principal');
 			$this->load->view('main/principal',$this->data);
-			$this->load->view('clientes/ficha',$this->data);
+			$this->load->view('clientes/crear',$this->data);
 			$this->load->view('footer/principal');
 			$this->load->view('cierre',$this->data);
 		}
@@ -221,18 +228,14 @@ class Cliente extends CI_Controller {
 	    {
 	    	$cliente['CodigoCliente'] = $this->input->post('codigo');
 	    	$cliente['RIF'] = $this->input->post('rif');
-	    	$cliente['NIT'] = $this->input->post('nit');
+	    	$cliente['Nombre'] = $this->input->post('nombre');
 	    	$cliente['zona'] = $this->input->post('zona');
 	    	$cliente['RazonSocial'] = $this->input->post('razonS');
 	    	$cliente['Direccion'] = $this->input->post('direccion');
-	    	$cliente['DireccionEnvio'] = $this->input->post('direccionE');
 	    	$cliente['Ciudad'] = $this->input->post('ciudad');
 	    	$cliente['Estado'] = $this->input->post('estado');
 	    	$cliente['Municipio'] = $this->input->post('municipio');
-	    	$cliente['email'] = $this->input->post('email');
-	    	$cliente['Telefonos'] = $this->input->post('tlf');
-	    	$cliente['Fax'] = $this->input->post('fax');
-	    	$cliente['CodigoGrupo'] = $this->input->post('codGrupo');
+	    	$cliente['CodigoGrupo'] = $this->input->post('grupo');
 	    	$cliente['Estatus'] = $this->input->post('estatus');
 	    	if($cliente['Estatus'] == 'Activo'){
 	    		$cliente['Estatus'] = 1;
@@ -240,12 +243,10 @@ class Cliente extends CI_Controller {
 	    		$cliente['Estatus'] = 0;
 	    	}
 	    	$cliente['Tarifa'] = $this->input->post('tarifa');
-	    	$cliente['CodigoContable'] = $this->input->post('codContable');
-	    	$cliente['DocumentoFiscal'] = $this->input->post('df');
 
 	    	print_r($cliente);
 	        $this->clientes->actualizar($cliente);
-	        redirect('cliente');
+	        redirect('orden');
 	    }
 	}
 

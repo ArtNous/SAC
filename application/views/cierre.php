@@ -55,7 +55,7 @@
                 if (dato.msj == 1){
                     $('#Cod').val(dato.CodigoCliente);
                     $('#grupo').val(dato.CodigoGrupo);
-                    $('#zona').val(dato.Zona);
+                    // $('#zona').val(dato.Zona);
                     $('#nombres').val(dato.Nombre);
                     $('#razon').val(dato.RazonSocial);
                     $('#direccion-sel').val(dato.Direccion);
@@ -89,10 +89,9 @@
                     $('#municipio option[selected]').prop('selected',false);
                     $('#municipio option[value="'+dato.Municipio+'"]').prop('selected',true);
                     $('#municipio').material_select();
-
-                    console.log(dato.Municipio);
-                    console.log(dato.Estado);
-                    console.log(dato.Ciudad);
+                    $('#btnRegCliente').find('i').text('edit');
+                    $('#btnRegCliente').removeClass('green').addClass('blue');
+                    document.getElementById('formCliente').action = '<?php echo base_url('cliente/editar/'); ?>' + document.getElementById('Cod').value;
                 } else {
                     console.log('El cliente no existe');
                 }

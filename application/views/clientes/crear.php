@@ -2,7 +2,8 @@
 	<div class="row">
 		<?php if($opcion == 1){
 			echo "<h3 class='center'>Crear cliente</h3>";
-			echo form_open('cliente/crear');
+			$atributos = array('id' => 'formCliente');
+			echo form_open('cliente/crear',$atributos);
 		} else {
 			echo "<h3 class='center'>Modificar cliente</h3>";
 			echo form_open('cliente/crear/' . $cliente['RIF']);
@@ -10,22 +11,31 @@
 		?>
 		<div class="row">
 			<div class="input-field col s6 m2 l2">
-				
-				<?php if($opcion == 1): ?>
-					<?php echo form_error('codigo','<span class="error_form">','</span>'); ?>
-					<input onblur="verificarCliente(this.value)"  id="Cod" type="text" class="validate" value="<?php echo set_value('codigo'); ?>" name="codigo">
-				<?php else:?>
-					<input id="Cod" type="text" class="validate" value="<?php echo trim($cliente['CodigoCliente']); ?>" name="codigo">
-				<?php endif;?>
+				<?php 
+					$atributos = array(
+						'name' => 'codigo',
+						'id' => 'Cod',
+						'value' => $opcion != 1 ? set_value('codigo',$cliente['CodigoCliente']) : "",
+						'class' => 'validate',
+						'onblur' => "verificarCliente(this.value)",
+					);
+					echo form_input($atributos);
+					$atributos = null;
+				?>
 				<label for="Cod">Código</label>
 			</div>
 			<div class="input-field col s6 m2 l2">
-				<?php if($opcion == 1): ?>
-					<?php echo form_error('RIF'); ?>
-					<input id="rif" type="text" class="validate" value="<?php echo set_value('RIF'); ?>" name="rif">
-				<?php else:?>
-					<input onblur="verificarCliente(this.value)" id="rif" type="text" class="validate" value="<?php echo trim($cliente['RIF']); ?>" name="rif">
-				<?php endif;?>
+				<?php 
+					$atributos = array(
+						'name' => 'rif',
+						'id' => 'rif',
+						'value' => $opcion != 1 ? set_value('rif',$cliente['RIF']) : "",
+						'class' => 'validate',
+						'onblur' => "verificarCliente(this.value)",
+					);
+					echo form_input($atributos);
+					$atributos = null;
+				?>
 				<label for="rif">RIF</label>
 			</div>
 			<div class="input-field col s6 m4 l4">
@@ -210,7 +220,7 @@
 				<label>Municipio</label>
 			</div>
 		</div>
-		<button type="submit" class="btn waves-effect waves-light" name="submit"><i class="material-icons right">send</i></button>
+		<button type="submit" class="btn green waves-effect waves-light" name="submit" id="btnRegCliente"><i class="material-icons right">send</i></button>
 	</form>
 </div>
 </div>
